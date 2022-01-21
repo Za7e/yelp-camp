@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const ejsMate = require('ejs-mate');
 const Campground = require('./models/campground');
 const methodOverride = require('method-override');
 
@@ -17,6 +18,7 @@ db.once("open", () => {
 
 const app = express();
 
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -56,6 +58,12 @@ app.put('/campgrounds/:id', async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findByIdAndUpdate(id, req.body.campground, { runValidators: true });
     res.redirect(`/campgrounds/${campground._id}`)
+})
+
+app.delete('/campgrounds/:id', async (req, res) => {
+    const { id } = req.params;
+    await Campground.findByIdAndDelete(id);
+    res.redirect('/campgrounds')
 })
 
 app.listen(3000, () => {
