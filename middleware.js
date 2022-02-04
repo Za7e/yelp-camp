@@ -51,6 +51,3 @@ module.exports.isReviewAuthor = async (req, res, next) => {
     }
     next();
 }
-
-// <% if(currentUser && review.author.equals(currentUser._id)) {%>
-
