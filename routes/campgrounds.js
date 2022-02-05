@@ -2,10 +2,15 @@ const express = require('express');
 const router = express.Router();
 const campgrounds = require('../controllers/campgrounds');
 const { isLoggedIn, isAuthor, validateCampground } = require('../middleware');
+//Required to upload files in new campground form - npm multer
+const multer = require('multer');
+const { storage } = require('../cloudinary');
+const upload = multer({ storage });
 
 router.route('/')
     .get(campgrounds.index)
-    .post(isLoggedIn, validateCampground, campgrounds.createCampground)
+    .post(isLoggedIn, upload.array('image'), validateCampground, campgrounds.createCampground)
+
 
 router.get('/new', isLoggedIn, campgrounds.renderNewForm);
 
