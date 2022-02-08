@@ -27,7 +27,21 @@ const seedDB = async () => {
             title: `${sample(descriptors)} ${sample(places)}`,
             image: 'https://source.unsplash.com/collection/10489597',
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas reprehenderit aut eum porro dignissimos animi similique ea, inventore fugit, ipsa beatae, nam cum id nihil delectus nobis amet exercitationem repellat!',
-            price
+            price,
+            geometry: {
+                type: 'Point',
+                coordinates: [-123.116838, 49.279862]
+            },
+            images: [
+                {
+                    url: 'https://res.cloudinary.com/za7e/image/upload/v1644348618/YelpCamp/bve4n5mj2bakfzbatcrb.jpg',
+                    filename: 'YelpCamp/bve4n5mj2bakfzbatcrb'
+                },
+                {
+                    url: 'https://res.cloudinary.com/za7e/image/upload/v1644348369/YelpCamp/pbck0tdw9m8wgdv8u0kp.jpg',
+                    filename: 'YelpCamp/pbck0tdw9m8wgdv8u0kp'
+                }
+            ]
         })
         await camp.save();
     }
